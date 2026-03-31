@@ -1,7 +1,8 @@
 import { InputManager } from "$lib/raycaster/input"
+import type { Vector2 } from "$lib/raycaster/math"
 
 // see this article: https://aaaa.sh/creatures/dda-algorithm-interactive/
-type Vector2 = { x: number; y: number }
+// see also: https://lodev.org/cgtutor/raycasting.html
 
 const fov = 2/3
 
@@ -9,8 +10,8 @@ export class Raycaster {
     input: InputManager
     map: number[][]
     player = $state({
-        x: 2.5, 
-        y: 2.5,
+        x: 1.5, 
+        y: 1.5,
         dir: 0, // radians
         planeX: 0,
         planeY: fov
@@ -110,8 +111,8 @@ export class Raycaster {
 
     update(dt: number) {
         let input = this.input
-        const moveSpeed = 0.002
-        const rotateSpeed = 0.002
+        const moveSpeed = 0.004
+        const rotateSpeed = 0.004
 
 
         this.player.dir += (+input.isPressed("d") - +input.isPressed("a")) * dt * rotateSpeed

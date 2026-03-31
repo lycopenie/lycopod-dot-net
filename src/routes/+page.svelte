@@ -12,9 +12,13 @@
     (check out <a href="https://old2.lycopod.net/softbody">/softbody</a> and <a href="https://old2.lycopod.net/fishes">/fishes</a>)
 </p>
 
-<a href="https://lycopod.net/raycaster">/raycaster</a>
+<a href="/raycaster">/raycaster</a>
 
 <h1>blog</h1>
-{#each data.posts as post}
-    <a href="/blog/{post.slug}">{post.meta.title}</a>
-{/each}
+<ul>
+    {#each data.posts as post}
+        <li>
+            <a href="/blog/{post.slug}">{post.meta.title}</a>
+        </li>
+    {/each}
+</ul>

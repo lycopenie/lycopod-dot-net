@@ -2,6 +2,7 @@
     import { onMount } from "svelte"
     import { Raycaster } from "$lib/raycaster/raycaster.svelte"
 	import { remap } from "$lib/raycaster/math"
+	import { Minimap } from "$lib/raycaster/minimap.svelte";
 
     let width = $state(640)
     let height = $state(480)
@@ -14,6 +15,12 @@
         { name: '3', path: '/raycaster/sky3.gif' }
     ];
 
+    let minimapCanvas: HTMLCanvasElement
+    let minimap: Minimap
+
+    let mWidth = $state(0);
+    let mHeight = $state(0);
+
     let canvas: HTMLCanvasElement
     let ctx: CanvasRenderingContext2D
     let engine: Raycaster
@@ -21,12 +28,23 @@
     let wallTexture: HTMLImageElement
 
     const map = [
-        [1,1,1,1,1,1],
-        [1,0,0,0,0,1],
-        [1,0,0,0,0,1],
-        [1,0,0,1,0,1],
-        [1,0,0,0,0,1],
-        [1,1,1,1,1,1]
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,1,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,1,0,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1],
+        [1,0,1,0,1,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,1],
+        [1,0,0,0,1,1,0,1,0,1,1,0,1,0,1,1,1,0,0,0,0,1],
+        [1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,1],
+        [1,0,1,0,1,1,1,1,1,0,1,0,1,1,1,0,1,0,0,0,0,1],
+        [1,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     ]
 
     async function loadImage(src: string): Promise<HTMLImageElement> {
@@ -46,6 +64,9 @@
         ctx = canvas.getContext('2d')!
 
         engine = new Raycaster(map)
+        minimap = new Minimap(minimapCanvas)
+        minimap.init()
+
         loop(0)
     }
 
@@ -55,6 +76,8 @@
         t1 = t0
         
         engine.update(dt)
+        minimap.position.x = engine.player.x
+        minimap.position.y = engine.player.y
 
         render()
         requestAnimationFrame(loop)
@@ -151,6 +174,15 @@
             {/each}
         </select>
     </div>
+
+    <canvas 
+    bind:this={minimapCanvas} 
+    bind:clientWidth={mWidth} 
+    bind:clientHeight={mHeight}
+    width={mWidth} 
+    height={mHeight}
+    class="minimap"
+    ></canvas>
 </div>
 
 
@@ -175,5 +207,15 @@
         width: 100vw;
         height: 100vh;
         z-index: -1;
+    }
+
+    .minimap {
+        position: absolute;
+        width: 30vmin;
+        height: 30vmin;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        background-color: black;
     }
 </style>
