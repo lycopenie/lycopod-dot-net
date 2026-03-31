@@ -7,10 +7,10 @@
     <a href="https://old.lycopod.net">see old site?</a>
     (check out <a href="https://old.lycopod.net/springs">/springs</a>, it's draggable!)
 </p>
-<p>
+<!-- <p>
     <a href="https://old2.lycopod.net">see older site?</a>
     (check out <a href="https://old2.lycopod.net/softbody">/softbody</a> and <a href="https://old2.lycopod.net/fishes">/fishes</a>)
-</p>
+</p> -->
 
 <a href="/raycaster">/raycaster</a>
 
@@ -22,3 +22,6 @@
         </li>
     {/each}
 </ul>
+
+<h1>contact</h1>
+discord: <a href="https://discord.com/users/401649298598658048">@lycopenie</a>
