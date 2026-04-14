@@ -1,0 +1,43 @@
+---
+title: "my guide for optimizing battery usage"
+date: "2026-03-30"
+---
+
+# Better battery usage!
+## Before we start, I'd like to establish these facts first:
+- I'm using a laptop with a Hybrid GPU configuration (intel/nvidia)
+- I'm using a Linux distribution, although you can still apply these fundamental ideas on other OSes.
+
+## Okay, let's start. I will order these tweaks/changes from most to least impactful.
+# 1. CPU/GPU tweaks
+## 1.1 Disabling/offloading the GPU
+On a hybrid system, the dedicated GPU draws power 24/7; even when it's not used on most configurations.
+- I achieved this using [envycontrol](https://github.com/bayasdev/envycontrol)/[supergfxctl](https://wiki.archlinux.org/title/Supergfxctl), you can alternatively use other softwares/configure your BIOS settings.
+
+You can setup offloading to use your dGPU only when it's needed, too. Though as I experimented, the dGPU stil draws *some* amount of power (might just be a skill issue, though.)
+
+## 1.2 Undervolting & Underclocking
+This is for more advanced users and might cause damage to your hardware. If you're uncomfortable with this fact, skip this chapter.
+
+There are other resources that explains this much better than I can.
+- For CPUs: See the [ArchWiki page](https://wiki.archlinux.org/title/Undervolting_CPU)
+- For GPUs: [LACT](https://github.com/ilya-zlobintsev/LACT)
+
+# 2. Software tweaks
+- I'll be using TLP and powertop.
+## 2.1 powertop:
+- Try the `--auto-tune` flag.
+- See the [ArchWiki page](https://wiki.archlinux.org/title/Powertop)
+
+## 2.2 TLP:
+- Read the [docs](https://linrunner.de/tlp/index.html)
+- See the [ArchWiki page](https://wiki.archlinux.org/title/TLP)
+
+
+# 3. Other tips
+## 3.1 Electron apps
+- I usually just avoid electron apps like the plague, lol.
+- Try the `--disable-gpu` flag! (e.g `spotify --disable-gpu`)
+
+# 4. My results:
+- Without undervolting, I was able to lower battery consumption from 12-24W down to 7W (That's 2-3 hours -> 10 hours!). Although you could go even lower with undervolting, this is enough for my use case.

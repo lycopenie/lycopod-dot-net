@@ -17,7 +17,9 @@ export function getAllPostMetadata() {
     const posts = Object.entries(modules).map(([path, module]) => {
         const meta = (module as any).metadata;
 
-        const slug = basename(dirname(path));
+        const slug = path
+            .replace('/src/routes/blog/', '')
+            .replace('/+page.svx', '');
 
         return {
             slug,
@@ -26,6 +28,7 @@ export function getAllPostMetadata() {
         };
     });
 
-    return posts
-        .sort((a, b) => new Date(b.meta.date).getTime() - new Date(a.meta.date).getTime());
+    return posts.sort((a, b) => 
+        new Date(b.meta.date).getTime() - new Date(a.meta.date).getTime()
+    );
 }

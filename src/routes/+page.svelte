@@ -24,4 +24,4 @@
 </ul>
 
 <h1>contact</h1>
-discord: <a href="https://discord.com/users/401649298598658048">@lycopenie</a>
+discord: <a href="https://discord.com/users/401649298598658048">@lycopod.net</a>
