@@ -76,11 +76,11 @@
     }
 
     function render() {
-        // Clear canvas
+        // clear
         ctx.fillStyle = "#000000";
         ctx.fillRect(0, 0, width, height);
 
-        // Draw alive cells
+        // alive cells
         ctx.fillStyle = "#ffffff";
         for (let i = 0; i < golArr.length; i++) {
             if (golArr[i]) {

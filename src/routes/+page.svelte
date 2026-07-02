@@ -13,6 +13,8 @@
 </p> -->
 
 <a href="/raycaster">/raycaster</a>
+<a href="/gameoflife">/gameoflife</a>
+
 
 <h1>blog</h1>
 <ul>
