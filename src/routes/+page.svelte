@@ -14,6 +14,7 @@
 
 <a href="/raycaster">/raycaster</a>
 <a href="/gameoflife">/gameoflife</a>
+<a href="/langton">/langton</a>
 
 
 <h1>blog</h1>
